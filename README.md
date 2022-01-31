@@ -1,4 +1,4 @@
-# what is DevOPs? (Heading)
-## why DevOps? (Subheading)
-### Benefits of DevOps (SUbsubheading)
+# what is DevOPs?
+## why DevOps?
+### Benefits of DevOps?
 
