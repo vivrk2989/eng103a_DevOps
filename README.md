@@ -140,7 +140,85 @@ end
 - `apt-get package manager install/remove/update/upgrade nginx`
 - upgrade - `vagrant upgrade`
 
+### Linus basics 
+ - who am I use `uname` / `uname -a` inside our machine
+ - where am I `pwd` will give us the default path of our directory
+ - list directories/files `ls`
+ - list all including hidden folder/file `ls -a`
+ - make directory `mkdir name-of-directory`
+- navigate to directory `cd name-of-directory` while typing the name press tab to autocomplete
+- how to create a file `touch file-name`and confirm with `ls` to see if we have created it
+or `nano file-name` to create and edit the file
+- how to display content of the file `cat file-name`
+- how to remove file `rm -rf file-name` and confirm it with `ls`
+- how to copy file `cp file-destination-name final-destination`
+- Research on google how to move a file `test.txt` inside `move` folder
+- how to check running processes `top` and `ctrl c` to get the terminal back
 
+### Permissions
+- Read Write Executable read only
+- How to check permissions `ll` or `ls -al`
+- change permissions `sudo chmod permissions-file-name` and use `ls` and you can see the colour of that file change indicating that it is executable
+
+When we start automating things, we need to make executable files
+
+### Bash scripting
+- `sudo nano provision.sh` sh is the extension. Inside type `#!/bin/bash`
+- make provision executable use `sudo chmod +x provision.sh`
+- to run all the instructions within the provision.sh file we use `sudo ./provision.sh` . Linux will then start reading the file and seeing `#!/bin/bash` it will understand that this is a bash script
+
+## Manual Installation of all Dependencies
+
+1. To run the tests, in this case we need to go into the environment folder using `cd environment`. We should be able to see the spec-tests folder.
+2. Navigate into spec-tests folder where we can see the `Rakefile` which has the RUBY test. Tests are written in RUBY
+3. let's install the dependencies for RUBY using `gem install bundler`. gem is the package manager and bundler is the package. Once the command is entered, you can see that gem is installed.
+4. run `bundle` - This will install install any dependencies inorder for us to run the test in RUBY.
+5. If we run the test within the spec-tests directory using `rake spec` , we can see the number of logs and failures.
+6. We get three failures - nodejs, nodejs version 6.1x and pm2. The tests would have failed if we didnt already have git, nginx installed
+7. Before we launch the app in this virtual environment, we have to make sure all the tests are passed. We need to install the dependencies inside the VM.
+8. Use `sudo apt-get install nodejs -y` to install nodejs
+9. To install nodejs version 6.1x, we need to Use `sudo apt-get install python-software-properties` and `curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -` 
+10. After this installation, we need to re-run `sudo apt-get install nodejs -y` command. This will pick up the nodejs version 6.1x
+11. Use `sudo npm install pm2 -g` to install the package pm2 globally
+
+### Launching the app
+
+- We have to navigate to the synced folder using `cd foldername` and then into the app folder using `cd app` .
+- Now from pm2 package, install npm using `npm install` 
+- Now use `npm start` . By doing this, we will be able to see the app running in our browser on the specified port
+- use `ctrl c` to exit out of the run
+
+### Automating the installation process
+1. Go to the provision.sh file and insert the following instructions
+```
+#!/bin/bash
+
+sudo apt-get update -y
+
+sudo apt-get upgrade -y
+
+sudo apt-get install nginx -y
+
+sudo apt-get install python-software-properties -y
+
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
+sudo apt-get install nodejs -y
+
+sudo npm install pm2 -g
+```
+2. Now having done this, if we run `vagrant up` to create our VM, all the required dependencies will be automatically installed for our environment.
+3. Now go into the VM using `vagrant ssh` 
+4. got into the synced folder using `cd folder-name` and then into the app folder using `cd app`
+5. once you are in the app directory of the synced folder, use `npm install` to launch our app
+6. then use `npm start` to see the app running in our browser in the specified port
+
+
+
+
+
+
+ 
 
 
 
