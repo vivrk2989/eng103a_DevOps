@@ -214,7 +214,105 @@ sudo npm install pm2 -g
 6. then use `npm start` to see the app running in our browser in the specified port
 
 
+### Linux Variables
+- Create Linux Var `FIRST_NAME=VIVEK` .This will create a variable in linux.
+- How to check the var `echo $FIRST_NAME`
 
+### Environment Variables
+ - How to check `env var`
+ - command: `printenv key` or `env`
+ - Create env var `export`
+ - `export LAST_NAME=RADHAKRISHNAN`
+ - How to make env var persistent?
+ - How to delete `env var`. Command: `unset VAR_NAME`
+ - How `kill` a process - sudo kill `id`
+
+ ### How to make environmnt persistent
+ - In the environment, Use `sudo nano ~/.bashrc` to open up .bashrc
+ - Go to the end of the file and add `export Variable=value` and then save and exit
+  
+ ### Using the grep command
+ - `Grep` is an acronym that stands for Global Regular Expression Print.Grep is a Linux / Unix command-line tool used to search for a string of characters in a specified file. The text search pattern is called a regular expression. When it finds a match, it prints the line with the result.
+ - use command `grep string-or-word file-name`. This will search for the string/word in that specific file.
+ - to search multiple files, use `grep string/word file-name1 filename2 file-name3` etc..
+
+ ### DB CONNECTION REQUIREMENT
+ ```
+ // connect to database
+if(process.env.DB_HOST) {
+  mongoose.connect(process.env.DB_HOST);
+
+  app.get("/posts" , function(req,res){
+      Post.find({} , function(err, posts){
+        if(err) return res.send(err);
+        res.render("posts/index" , {posts:posts});
+      })
+  });
+}
+```
+
+### Nginx Reverse proxy
+
+- We want to be able to redirect the traffic from port 3000 to port 80, which is the default port with the help of Reverse Proxy for which nginx will used as a web server.
+- This can be done use the following steps:
+1. use `vagrant up` to create the virtual machine and `vagrant ssh` to access it
+2. once in the virtual environment use `sudo nano /etc/nginx/sites-available/default`
+3. A new text editor will open up. Scroll down using the keyboard and change the location as following:
+```
+location / {
+                proxy_pass http://localhost:3000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+    }
+```
+4. Now save and exit it.
+5. Navigate into the synced folder using `cd folder-name` and then into the app folder using `cd app use ` and then use `sudo systemctl restart nginx` to restart 
+6. Now use `npm install` and `npm start` . This will have the app running in port 80, which is the default port for web browsers.
+
+## Creating two virtual machines -app and db
+
+1. exit out of the vm and Destroy the VM using `vagrant destroy`
+
+2. Then replace the vagrantfile with the following code:
+```
+Vagrant.configure("2") do |config|
+ config.vm.define "app" do |app|
+    app.vm.box = "ubuntu/xenial64"
+    app.vm.network "private_network", ip: "192.168.10.100"
+
+    app.vm.synced_folder ".", "/home/vagrant/app"
+    app.vm.synced_folder "environment", "/home/vagrant/environment"
+    app.vm.provision "shell", path: "provision/provision.sh" , privileged: false
+ 
+  end
+
+ config.vm.define "db" do |db|
+    db.vm.box = "ubuntu/xenial64"
+    db.vm.network "private_network", ip: "192.168.10.150"
+
+  end
+
+end
+```
+2. Save it and then use `vagrant up`. This will create the required two VM - app and db.
+3. Then use `vagrant ssh app` to access the app vm.
+4. use `sudo nano /etc/nginx/sites-available/default` and make the following changes again:
+```
+location / {
+                proxy_pass http://localhost:3000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+    } 
+```
+5. Then use `sudo systemctl status nginx` to check if nginx is running or not.
+6. Then use `sudo systemctl restart nginx`.
+7. use `cd app/app` and then use `npm install` and then `npm start` . This will show that the app is running and we can check this out by going to the web browser and using `192.168.10.100`.
 
 
 
