@@ -324,8 +324,7 @@ location / {
 
 ### Installing Dependencies for Mongodb
 
-![Image Link] (https://github.com/vivrk2989/eng103a_DevOps/blob/main/Images/Mongodb%20dependency%20installation.png)
-
+![Image Link](https://github.com/vivrk2989/eng103a_DevOps/blob/main/Images/Mongodb%20dependency%20installation.png)
 
 1. use `vagrant ssh db` to access the db VM
 2. `sudo apt-get update -y` 
