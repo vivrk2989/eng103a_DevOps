@@ -679,7 +679,7 @@ The services included are:
 - In the Add Tags section, type Key - `NAME`, Value - `ENG103A_YourName` . Now click `Next Configure Security Group`
 - Here add `eng103a_yourname` in the Security group name and Description. We now have to define rules for the security group we created. So in the rules section, we have to allow access to our ip. So choose my ip from the drop down menu. In the description if needed, add `my ip only`. Then click `Review and Launch`
 - After reviewing, click `Launch`. On clicking so, it will ask for a `key pair`. Key can be found in the `eng103a.pem` file which is shared.
-- Now the key should be put into the `.ssh` script. So go back into the gitbash terminal. If directory `.ssh` is not created, got out to the home location and use `mkdir .ssh`. Now create a file using `nano eng103a.pem` and copy the Key pari that was shared into it.
+- Now the key should be put into the `.ssh` script. So go back into the gitbash terminal. If directory `.ssh` is not created, got out to the home location and use `mkdir .ssh`. Now create a file using `nano eng103a.pem` and copy the Key pair that was shared into it.
 - Use `cat eng103a.pem` to check. So we just created the `eng103a.pem` file in our `.ssh` directory.
 - Now go back into the browser and choose the correct kep pair name - `eng103a` and  click `launch instances`.
 - Click on the instance id and it will bring up the instances dashboard. If no name exists, edit your name next to the instance id like - `eng103a_yourname`.
