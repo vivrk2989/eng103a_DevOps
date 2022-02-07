@@ -739,3 +739,8 @@ sudo npm install pm2 -g
 11. Go back to the `EC2` page and click on `instances running` and select your instance and choose the `security` tab. Here put type as `Custom TCP`, port range as `3000` and give a description and click `Save rules`.
 12. Now copy the `Public ip address` for the instance and put it in the browser like - `...........:3000`. This will get the app running.
 -----------------
+
+
+## 2-tier Architecture
+![Image Link](https://github.com/vivrk2989/eng103a_DevOps/blob/main/Images/2-Tier%20Architecture%20Design.png)
+
