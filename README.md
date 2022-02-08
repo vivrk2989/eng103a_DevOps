@@ -744,3 +744,12 @@ sudo npm install pm2 -g
 ## 2-tier Architecture
 ![Image Link](https://github.com/vivrk2989/eng103a_DevOps/blob/main/Images/2-Tier%20Architecture%20Design.png)
 
+
+
+### Creating an AMI to launch both the APP and DB instances
+
+- 
+
+### Monitoring with Cloudwatch
+![Image Link](https://github.com/vivrk2989/eng103a_DevOps/blob/main/Images/Monitoring%20with%20Cloudwatch.png)
+
