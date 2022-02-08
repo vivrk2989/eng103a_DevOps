@@ -3,7 +3,7 @@
 
 Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance. Customers of all sizes and industries can use Amazon S3 to store and protect any amount of data for a range of use cases, such as data lakes, websites, mobile applications, backup and restore, archive, enterprise applications, IoT devices, and big data analytics.
 
-1. SSH into your AWS machine using `ssh -i "eng103a.pem" ubuntu@............eu.west-1.compute.amazonaws.com`
+1. SSH into your AWS machine using `ssh -i "filename.pem" ubuntu@............eu.west-1.compute.amazonaws.com`
 2. update and upgrade using `sudo apt update -y` and `sudo apt upgrade -y`
 3. To install python, use `sudo apt install python3-pip`
 4. check the version of python using `python --version`
